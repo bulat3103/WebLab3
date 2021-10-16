@@ -1,0 +1,27 @@
+.clock {
+    padding-top: 2.5em;
+    text-align: center;
+    font-size: 45px;
+    font-weight: bold;
+    color: rgb(49, 95, 114);
+}
+
+.startButton {
+    text-align: center;
+    padding-top: 4em;
+}
+
+.startButtonLink {
+    display: inline-block;
+    padding: 0 1em;
+    width: auto;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: rgb(49, 95, 114);
+}
+
+.startButtonLink:hover {
+    background-color: rgb(128, 64, 155);
+}

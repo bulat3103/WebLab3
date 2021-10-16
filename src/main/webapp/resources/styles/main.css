@@ -1,0 +1,127 @@
+#pageTable {
+    padding-top: 1em;
+    width: 95%;
+    margin: auto;
+    border-spacing: 1em;
+}
+
+.content {
+    padding: 0 0 20px;
+    vertical-align: top;
+    background-color: white;
+}
+
+.plate_top {
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 0 0;
+    background-color: rgb(49, 95, 114);
+    color: white;
+    text-align: center;
+}
+
+.plate_top_title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.graph_image {
+    text-align: center;
+}
+
+.center_labeled {
+    display: inline-block;
+    position: relative;
+    margin: 2% 1% 0;
+    font-size: 14px;
+}
+
+#input {
+    width: 95%;
+    margin: auto;
+    text-align: center;
+}
+
+.input_label {
+    font-weight: bold;
+}
+
+.buttons {
+    margin-top: 7%;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.buttons::before {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 50%;
+    margin: 0 auto 4%;
+    background-color: rgb(49, 95, 114);
+}
+
+.button {
+    height: 35%;
+    width: 50%;
+    background-color: rgb(49, 95, 114);
+    border: none;
+    margin-bottom: .5rem;
+    transform: scale(0.7);
+}
+
+#checkButton, #clearButton, #exportButton, #importButton {
+    background-color: rgb(49, 95, 114);
+}
+
+#checkButton:hover, #clearButton:hover, #exportButton:hover, #importButton:hover {
+    background-color: #76b8ff;
+}
+
+#message {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: red;
+}
+
+.contentTable {
+    padding: 0 0 50px;
+    vertical-align: top;
+    background-color: white;
+}
+
+#table {
+    width: 95%;
+    position: relative;
+}
+
+.scroll_container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 54px;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.resultTable {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.table_header {
+    background-color: #f57e7e;
+}
+
+.slider {
+    width: 50%;
+    margin-top: 1%;
+    margin-left: 25%;
+}
+
+.input_value {
+    padding-bottom: 2%;
+}
