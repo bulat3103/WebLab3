@@ -28,13 +28,14 @@
                         <h2 class="plate_top_title">Values</h2>
                     </div>
                     <h:form id="input_form">
+                        <p:growl id="growl" showDetail="true"/>
                         <table id="input">
                             <tr>
                                 <td class="input_label">
                                     <h:outputLabel value="X"/>
                                 </td>
                                 <td class="input_value">
-                                    <p:inputText id="x_input" maxlength="10" a:placeholder="Number from -5 to 3..." value="#{pointSubmitView.x}"/>
+                                    <p:inputText id="x_input" maxlength="10" a:placeholder="Number from -5 to 3..." value="#{pointsBean.x}"/>
                                 </td>
                             </tr>
                             <tr>
@@ -42,13 +43,13 @@
                                     <h:outputLabel value="Y"/>
                                 </td>
                                 <td class="input_value">
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="-3" value="#{pointSubmitView.ySelect1}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="-2" value="#{pointSubmitView.ySelect2}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="-1" value="#{pointSubmitView.ySelect3}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="0" value="#{pointSubmitView.ySelect4}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="1" value="#{pointSubmitView.ySelect5}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="2" value="#{pointSubmitView.ySelect6}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="3" value="#{pointSubmitView.ySelect7}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="-3" value="#{pointsBean.ySelect1}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="-2" value="#{pointsBean.ySelect2}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="-1" value="#{pointsBean.ySelect3}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="0" value="#{pointsBean.ySelect4}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="1" value="#{pointsBean.ySelect5}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="2" value="#{pointsBean.ySelect6}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="3" value="#{pointsBean.ySelect7}"/>
                                 </td>
                             </tr>
                             <tr>
@@ -57,20 +58,18 @@
                                 </td>
                                 <td class="input_value">
                                     <div id="sliderBlock">
-                                        <p:inputText id="r_input" value="#{pointSubmitView.r}"/>
-                                        <p:slider styleClass="slider" for="r_input" minValue="2.0" maxValue="5.0" step="0.1"/>
+                                        <p:inputText id="r_input" value="#{pointsBean.r}"/>
+                                        <p:slider styleClass="slider" for="r_input" minValue="2.0" maxValue="5.0" step="0.1">
+                                            <p:ajax event="slideEnd" listener="#{pointsBean.onSlideEnd}" update="r_input"/>
+                                        </p:slider>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </h:form>
                     <div class="buttons">
-                        <p:commandButton styleClass="button" id="checkButton" type="submit" action="#{pointSubmitView.submitHitResult}" value="Submit">
-                            <f:ajax execute="@form" render="resultsTable"/>
-                        </p:commandButton><br/>
-                        <p:commandButton styleClass="button" id="clearButton" action="#{tableView.clearTable}" value="Clear">
-                            <f:ajax execute="@form" render="resultsTable"/>
-                        </p:commandButton><br/>
+                        <p:commandButton styleClass="button" id="checkButton" type="submit" action="#{pointsBean.addResultToDB}" value="Submit" update="resultsTable"/><br/>
+                        <p:commandButton styleClass="button" id="clearButton" action="#{pointsBean.clearTable}" value="Clear" update="resultsTable"/><br/>
                         <p:commandButton styleClass="button" id="exportButton" value="Export" onclick="exportToXLS()"/><br/>
                         <p:commandButton styleClass="button" id="importButton" value="Import"/>
                     </div>
@@ -85,7 +84,7 @@
                         <h2 class="plate_top_title">Table</h2>
                     </div>
                     <div id="scroll" class="scroll_container">
-                        <h:dataTable id="resultsTable" styleClass="resultTable" value="#{tableView.pointResultList}" var="point">
+                        <h:dataTable id="resultsTable" styleClass="resultTable" value="#{pointsBean.pointResultList}" var="point">
                             <h:column headerClass="table_header">
                                 <f:facet name="header">X</f:facet>
                                 <h:outputText value="#{point.x}"/>

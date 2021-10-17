@@ -117,13 +117,13 @@ function drawCanvas(radius) {
 
 drawCanvas(2);
 
-function slideEnd() {
-
+function changeRadius() {
+    console.log("Сосать!");
+    console.log(document.getElementById("sliderBlock").children[0]);
 }
 
 function validateRadius(value) {
     const R_MIN = 2;
     const R_MAX = 5;
     return !!(isNumeric(value) && value > R_MIN && value < R_MAX);
-
 }

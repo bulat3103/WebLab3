@@ -5,8 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PointResultDataAccessObject implements EntityDataAccessObject<Long, PointResult>{
@@ -29,8 +29,8 @@ public class PointResultDataAccessObject implements EntityDataAccessObject<Long,
     }
     @Override
     public List<PointResult> getAll() {
-        List<PointResult> pointResultList = sessionFactory.openSession().createQuery("select p from " + PointResult.class.getSimpleName() + " p").list();
-        return pointResultList;
+        Query query = sessionFactory.openSession().createQuery("select p from " + PointResult.class.getSimpleName() + " p");
+        return (List<PointResult>) query.getResultList();
     }
 
     @Override
