@@ -22,15 +22,11 @@ public class PointResultController {
     }
 
     private boolean validate(double x, int y, double r) {
-        return validateX(x) && validateY(y) && validateR(r);
+        return validateX(x) && validateR(r);
     }
 
     private boolean validateX(double x) {
         return x >= -5 && x <= 3;
-    }
-
-    private boolean validateY(int y) {
-        return yValues.contains(y);
     }
 
     private boolean validateR(double r) {

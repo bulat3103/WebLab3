@@ -28,6 +28,7 @@ public class PointsBean {
     private boolean ySelect5;
     private boolean ySelect6;
     private boolean ySelect7;
+
     private String r;
 
     public PointsBean() {
@@ -146,9 +147,5 @@ public class PointsBean {
 
     public void setR(String r) {
         this.r = r;
-    }
-
-    public void onSlideEnd(SlideEndEvent event) {
-        r = String.valueOf(event.getValue());
     }
 }

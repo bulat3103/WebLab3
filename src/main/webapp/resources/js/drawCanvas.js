@@ -5,40 +5,21 @@ function isNumeric(n) {
 }
 
 canvasGraph.addEventListener('click', function (event) {
-    document.getElementById("r_input").style.removeProperty("border-color");
-    document.getElementById("messageArea").innerHTML = "";
-    let rVal = document.getElementById('r_input').value;
-    if (!validateRadius(rVal)) {
-        document.getElementById("r_input").style.borderColor = "#d94343";
-        document.getElementById("messageArea").innerHTML = "Радиус не задан";
-        return;
-    }
-    let xFromCanvas = (event.offsetX - 125) / 82 * rVal;
-    if (xFromCanvas < -3) xFromCanvas = -3;
-    else if (xFromCanvas > 5) xFromCanvas = 5;
+    let rVal = document.querySelector("#input_form\\:r_hidden").innerHTML;
+    let xFromCanvas = (event.offsetX - 200) / 90 * rVal;
+    if (xFromCanvas < -5) xFromCanvas = -5;
+    else if (xFromCanvas > 3) xFromCanvas = 3;
 
-    let yFromCanvas = (-event.offsetY + 125) / 82 * rVal;
+    let yFromCanvas = (-event.offsetY + 200) / 90 * rVal;
     if (yFromCanvas <= -3) yFromCanvas = -3;
-    else if (yFromCanvas >= 5) yFromCanvas = 5;
-    $.get("app", {
-        'xVal': Math.floor(xFromCanvas * 100) / 100,
-        'yVal': Math.floor(yFromCanvas * 100) / 100,
-        'rVal': rVal,
-        'timezone': new Date().getTimezoneOffset()
-    }).done(function (data) {
-        document.getElementById("scroll").innerHTML = data;
-        let hits = document.getElementsByClassName("hit");
-        if (hits[hits.length - 1].innerHTML === "true") {
-            drawPoint(xFromCanvas, yFromCanvas, rVal, "#22be00");
-        } else {
-            drawPoint(xFromCanvas, yFromCanvas, rVal, "#ff0000");
-        }
-    })
+    else if (yFromCanvas >= 3) yFromCanvas = 3;
+
+    drawPoint(xFromCanvas, yFromCanvas, rVal, "#0db145")
 })
 
 function drawPoint(xPosition, yPosition, radius, color) {
-    yPosition = 125 - 82 * yPosition / radius;
-    xPosition = 125 + 82 * xPosition / radius
+    yPosition = 200 - 90 * yPosition / radius;
+    xPosition = 200 + 90 * xPosition / radius
     const ctx = canvasGraph.getContext('2d');
     ctx.beginPath();
     ctx.moveTo(xPosition, yPosition);
@@ -49,10 +30,22 @@ function drawPoint(xPosition, yPosition, radius, color) {
     ctx.closePath();
 }
 
+function drawPointAfterSubmit() {
+    let hits = document.getElementsByClassName("hitres");
+    let xs = document.getElementsByClassName("xVal");
+    let ys = document.getElementsByClassName("yVal");
+    let rs = document.getElementsByClassName("rVal");
+    for (let i = 0; i < hits.length; i++) {
+
+    }
+}
+
 function drawCanvas(radius) {
     const ctx = canvasGraph.getContext('2d');
     const canvasGraphWidth = canvasGraph.clientWidth;
     const canvasGraphHeight = canvasGraph.clientHeight;
+    ctx.clearRect(0, 0, canvasGraphWidth, canvasGraphHeight);
+    ctx.globalAlpha = 1;
     const xAxis = canvasGraphWidth / 2;
     const yAxis = canvasGraphHeight / 2;
     const xNameAxis = canvasGraphWidth / 12;
@@ -117,9 +110,10 @@ function drawCanvas(radius) {
 
 drawCanvas(2);
 
-function changeRadius() {
-    console.log("Сосать!");
-    console.log(document.getElementById("sliderBlock").children[0]);
+function clickPress(event) {
+    if (event.keyCode == 13) {
+        drawCanvas(document.querySelector("#input_form\\:r_hidden").innerHTML);
+    }
 }
 
 function validateRadius(value) {

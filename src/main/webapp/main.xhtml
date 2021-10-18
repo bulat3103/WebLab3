@@ -28,14 +28,16 @@
                         <h2 class="plate_top_title">Values</h2>
                     </div>
                     <h:form id="input_form">
-                        <p:growl id="growl" showDetail="true"/>
                         <table id="input">
                             <tr>
                                 <td class="input_label">
                                     <h:outputLabel value="X"/>
                                 </td>
                                 <td class="input_value">
-                                    <p:inputText id="x_input" maxlength="10" a:placeholder="Number from -5 to 3..." value="#{pointsBean.x}"/>
+                                    <p:inputNumber id="x_input" maxlength="10" a:placeholder="Number from -5 to 3..." value="#{pointsBean.x}" required="true">
+                                        <f:validateRequired/>
+                                        <f:validateDoubleRange minimum="-5" maximum="3"/>
+                                    </p:inputNumber>
                                 </td>
                             </tr>
                             <tr>
@@ -58,23 +60,22 @@
                                 </td>
                                 <td class="input_value">
                                     <div id="sliderBlock">
-                                        <p:inputText id="r_input" value="#{pointsBean.r}"/>
-                                        <p:slider styleClass="slider" for="r_input" minValue="2.0" maxValue="5.0" step="0.1">
-                                            <p:ajax event="slideEnd" listener="#{pointsBean.onSlideEnd}" update="r_input"/>
-                                        </p:slider>
+                                        <h:outputText id="r_hidden" value="#{pointsBean.r}" style="display: none"/>
+                                        <p:inputText id="r_input" value="#{pointsBean.r}" onkeypress="clickPress(event)"/>
+                                        <p:slider styleClass="slider" for="r_input" display="r_hidden" minValue="2.0" maxValue="5.0" step="0.1" displayTemplate="{value}"/>
                                     </div>
-                                </td>
+                                 </td>
                             </tr>
                         </table>
                     </h:form>
                     <div class="buttons">
-                        <p:commandButton styleClass="button" id="checkButton" type="submit" action="#{pointsBean.addResultToDB}" value="Submit" update="resultsTable"/><br/>
+                        <p:commandButton styleClass="button" id="checkButton" type="submit" action="#{pointsBean.addResultToDB}" value="Submit" update="resultsTable" onclick="drawPointAfterSubmit()"/><br/>
                         <p:commandButton styleClass="button" id="clearButton" action="#{pointsBean.clearTable}" value="Clear" update="resultsTable"/><br/>
                         <p:commandButton styleClass="button" id="exportButton" value="Export" onclick="exportToXLS()"/><br/>
                         <p:commandButton styleClass="button" id="importButton" value="Import"/>
                     </div>
                     <div id="message">
-                        <h:outputLabel id="messageArea"/>
+
                     </div>
                 </td>
             </tr>
@@ -87,15 +88,15 @@
                         <h:dataTable id="resultsTable" styleClass="resultTable" value="#{pointsBean.pointResultList}" var="point">
                             <h:column headerClass="table_header">
                                 <f:facet name="header">X</f:facet>
-                                <h:outputText value="#{point.x}"/>
+                                <h:outputText styleClass="xVal" value="#{point.x}"/>
                             </h:column>
                             <h:column headerClass="table_header">
                                 <f:facet name="header">Y</f:facet>
-                                <h:outputText value="#{point.y}"/>
+                                <h:outputText styleClass="yVal" value="#{point.y}"/>
                             </h:column>
                             <h:column headerClass="table_header">
                                 <f:facet name="header">R</f:facet>
-                                <h:outputText value="#{point.r}"/>
+                                <h:outputText styleClass="rVal" value="#{point.r}"/>
                             </h:column>
                             <h:column headerClass="table_header">
                                 <f:facet name="header">Current time</f:facet>
@@ -107,7 +108,7 @@
                             </h:column>
                             <h:column headerClass="table_header">
                                 <f:facet name="header">Hit</f:facet>
-                                <h:outputText value="#{point.hit}"/>
+                                <h:outputText styleClass="hitres" value="#{point.hit}"/>
                             </h:column>
                         </h:dataTable>
                     </div>
