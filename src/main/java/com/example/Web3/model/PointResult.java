@@ -14,7 +14,7 @@ public class PointResult implements Serializable {
     @Column(name = "x")
     private double x;
     @Column(name = "y")
-    private int y;
+    private double y;
     @Column(name = "r")
     private double r;
     @Column(name = "time")
@@ -27,7 +27,7 @@ public class PointResult implements Serializable {
     public PointResult() {
     }
 
-    public PointResult(double x, int y, double r, String time, boolean valid, boolean hit) {
+    public PointResult(double x, double y, double r, String time, boolean valid, boolean hit) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -44,11 +44,11 @@ public class PointResult implements Serializable {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 

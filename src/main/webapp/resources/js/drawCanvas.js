@@ -1,3 +1,4 @@
+let radius = 2;
 const canvasGraph = document.getElementById('canvas');
 
 function isNumeric(n) {
@@ -6,20 +7,24 @@ function isNumeric(n) {
 
 canvasGraph.addEventListener('click', function (event) {
     let rVal = document.querySelector("#input_form\\:r_hidden").innerHTML;
-    let xFromCanvas = (event.offsetX - 200) / 90 * rVal;
+    let xFromCanvas = (event.offsetX - 200) / 165 * 5;
     if (xFromCanvas < -5) xFromCanvas = -5;
     else if (xFromCanvas > 3) xFromCanvas = 3;
 
-    let yFromCanvas = (-event.offsetY + 200) / 90 * rVal;
+    let yFromCanvas = (-event.offsetY + 200) / 165 * 5;
     if (yFromCanvas <= -3) yFromCanvas = -3;
     else if (yFromCanvas >= 3) yFromCanvas = 3;
 
-    drawPoint(xFromCanvas, yFromCanvas, rVal, "#0db145")
+    $(".pointX").val(Math.floor(xFromCanvas * 100) / 100);
+    $(".pointY").val(Math.floor(yFromCanvas * 100) / 100);
+    $(".pointR").val(rVal);
+    $(".submitCanvas").click();
 })
 
-function drawPoint(xPosition, yPosition, radius, color) {
-    yPosition = 200 - 90 * yPosition / radius;
-    xPosition = 200 + 90 * xPosition / radius
+function drawPoint(xPosition, yPosition, color) {
+    console.log(xPosition, yPosition);
+    yPosition = 200 - 165 * yPosition / 5;
+    xPosition = 200 + 165 * xPosition / 5;
     const ctx = canvasGraph.getContext('2d');
     ctx.beginPath();
     ctx.moveTo(xPosition, yPosition);
@@ -31,16 +36,34 @@ function drawPoint(xPosition, yPosition, radius, color) {
 }
 
 function drawPointAfterSubmit() {
+    const ctx = canvasGraph.getContext('2d');
+    const canvasGraphWidth = canvasGraph.clientWidth;
+    const canvasGraphHeight = canvasGraph.clientHeight;
+    ctx.clearRect(0, 0, canvasGraphWidth, canvasGraphHeight);
+    ctx.globalAlpha = 1;
     let hits = document.getElementsByClassName("hitres");
     let xs = document.getElementsByClassName("xVal");
     let ys = document.getElementsByClassName("yVal");
-    let rs = document.getElementsByClassName("rVal");
+    drawCanvas();
     for (let i = 0; i < hits.length; i++) {
-
+        if (hits[i].innerHTML === "true") {
+            drawPoint(xs[i].innerHTML, ys[i].innerHTML, "#22be00");
+        } else {
+            drawPoint(xs[i].innerHTML, ys[i].innerHTML, "#ff0000");
+        }
     }
 }
 
-function drawCanvas(radius) {
+function clearPointsFromCanvas() {
+    const ctx = canvasGraph.getContext('2d');
+    const canvasGraphWidth = canvasGraph.clientWidth;
+    const canvasGraphHeight = canvasGraph.clientHeight;
+    ctx.clearRect(0, 0, canvasGraphWidth, canvasGraphHeight);
+    ctx.globalAlpha = 1;
+    drawCanvas();
+}
+
+function drawCanvas() {
     const ctx = canvasGraph.getContext('2d');
     const canvasGraphWidth = canvasGraph.clientWidth;
     const canvasGraphHeight = canvasGraph.clientHeight;
@@ -96,7 +119,7 @@ function drawCanvas(radius) {
     ctx.fillStyle = "#f53737";
     ctx.beginPath();
     ctx.moveTo(xAxis, yAxis);
-    ctx.lineTo(xAxis, yAxis + yNameAxis);
+    ctx.lineTo(xAxis, yAxis + radius * 0.5 * yNameAxis);
     ctx.lineTo(xAxis + radius * xNameAxis, yAxis);
     ctx.fill();
     ctx.closePath();
@@ -108,16 +131,11 @@ function drawCanvas(radius) {
     ctx.closePath();
 }
 
-drawCanvas(2);
+drawCanvas();
 
 function clickPress(event) {
     if (event.keyCode == 13) {
-        drawCanvas(document.querySelector("#input_form\\:r_hidden").innerHTML);
+        radius = document.querySelector("#input_form\\:r_hidden").innerHTML;
+        drawCanvas();
     }
-}
-
-function validateRadius(value) {
-    const R_MIN = 2;
-    const R_MAX = 5;
-    return !!(isNumeric(value) && value > R_MIN && value < R_MAX);
 }

@@ -21,6 +21,8 @@ public class PointsBean {
     private EntityDataAccessObject<Long, PointResult> dbManager = new PointResultDataAccessObject();
 
     private String x;
+    private String xFromCanvas;
+
     private boolean ySelect1;
     private boolean ySelect2;
     private boolean ySelect3;
@@ -28,10 +30,18 @@ public class PointsBean {
     private boolean ySelect5;
     private boolean ySelect6;
     private boolean ySelect7;
+    private String yFromCanvas;
 
     private String r;
+    private String rFromCanvas;
 
     public PointsBean() {
+    }
+
+    public void addResultFromCanvasToDB() {
+        PointResult pointResult = pointResultController.createPointResult(xFromCanvas, yFromCanvas, rFromCanvas);
+        dbManager.insert(pointResult);
+        pointResultList.add(pointResult);
     }
 
     public void addResultToDB() {
@@ -147,5 +157,29 @@ public class PointsBean {
 
     public void setR(String r) {
         this.r = r;
+    }
+
+    public String getyFromCanvas() {
+        return yFromCanvas;
+    }
+
+    public void setyFromCanvas(String yFromCanvas) {
+        this.yFromCanvas = yFromCanvas;
+    }
+
+    public String getxFromCanvas() {
+        return xFromCanvas;
+    }
+
+    public void setxFromCanvas(String xFromCanvas) {
+        this.xFromCanvas = xFromCanvas;
+    }
+
+    public String getrFromCanvas() {
+        return rFromCanvas;
+    }
+
+    public void setrFromCanvas(String rFromCanvas) {
+        this.rFromCanvas = rFromCanvas;
     }
 }
