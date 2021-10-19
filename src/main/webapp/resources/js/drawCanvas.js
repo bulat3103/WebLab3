@@ -7,7 +7,7 @@ function isNumeric(n) {
 
 canvasGraph.addEventListener('click', function (event) {
     document.getElementById("messageArea").innerHTML = "";
-    let rVal = document.querySelector("#input_form\\:r_hidden").innerHTML;
+    let rVal = document.getElementById("input_form:r_hidden").value;
     let xFromCanvas = (event.offsetX - 200) / 165 * 5;
     if (xFromCanvas < -5) xFromCanvas = -5;
     else if (xFromCanvas > 3) xFromCanvas = 3;
@@ -27,7 +27,6 @@ canvasGraph.addEventListener('click', function (event) {
 })
 
 function drawPoint(xPosition, yPosition, color) {
-    console.log(xPosition, yPosition);
     yPosition = 200 - 165 * yPosition / 5;
     xPosition = 200 + 165 * xPosition / 5;
     const ctx = canvasGraph.getContext('2d');
@@ -141,9 +140,8 @@ function drawCanvas() {
 drawCanvas();
 redrawPoints();
 
-function clickPress(event) {
-    if (event.keyCode == 13) {
-        radius = document.querySelector("#input_form\\:r_hidden").innerHTML;
-        drawCanvas();
-    }
+function check() {
+    radius = document.getElementById("input_form:r_hidden").value;
+    drawCanvas();
+    redrawPoints();
 }

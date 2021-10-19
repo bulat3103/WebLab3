@@ -183,4 +183,8 @@ public class PointsBean {
     public void setrFromCanvas(String rFromCanvas) {
         this.rFromCanvas = rFromCanvas;
     }
+
+    public void onSlideEnd(SlideEndEvent event) {
+        this.r = String.valueOf(event.getValue());
+    }
 }
