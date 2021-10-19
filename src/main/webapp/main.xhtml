@@ -40,10 +40,7 @@
                                     <h:outputLabel value="X"/>
                                 </td>
                                 <td class="input_value">
-                                    <p:inputNumber id="x_input" maxlength="10" a:placeholder="Number from -5 to 3..." value="#{pointsBean.x}" required="true">
-                                        <f:validateRequired/>
-                                        <f:validateDoubleRange minimum="-5" maximum="3"/>
-                                    </p:inputNumber>
+                                    <p:inputText id="x_input" maxlength="10" a:placeholder="Number from -5 to 3..." value="#{pointsBean.x}"/>
                                 </td>
                             </tr>
                             <tr>
@@ -51,13 +48,13 @@
                                     <h:outputLabel value="Y"/>
                                 </td>
                                 <td class="input_value">
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="-3" value="#{pointsBean.ySelect1}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="-2" value="#{pointsBean.ySelect2}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="-1" value="#{pointsBean.ySelect3}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="0" value="#{pointsBean.ySelect4}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="1" value="#{pointsBean.ySelect5}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="2" value="#{pointsBean.ySelect6}"/>
-                                    <p:selectBooleanCheckbox styleClass="center_labeled" itemLabel="3" value="#{pointsBean.ySelect7}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" widgetVar="select1" itemLabel="-3" value="#{pointsBean.ySelect1}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" widgetVar="select2" itemLabel="-2" value="#{pointsBean.ySelect2}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" widgetVar="select3" itemLabel="-1" value="#{pointsBean.ySelect3}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" widgetVar="select4" itemLabel="0" value="#{pointsBean.ySelect4}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" widgetVar="select5" itemLabel="1" value="#{pointsBean.ySelect5}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" widgetVar="select6" itemLabel="2" value="#{pointsBean.ySelect6}"/>
+                                    <p:selectBooleanCheckbox styleClass="center_labeled" widgetVar="select7" itemLabel="3" value="#{pointsBean.ySelect7}"/>
                                 </td>
                             </tr>
                             <tr>
@@ -68,7 +65,7 @@
                                     <div id="sliderBlock">
                                         <p:inputText id="r_hidden" value="#{pointsBean.r}" style="display: none"/>
                                         <p:inputText id="r_input" value="#{pointsBean.r}"/>
-                                        <p:slider styleClass="slider" for="r_input" minValue="2.0" maxValue="5.0" step="0.1">
+                                        <p:slider id="r_slider" styleClass="slider" for="r_input" minValue="2.0" maxValue="5.0" step="0.1">
                                             <p:ajax event="slideEnd" listener="#{pointsBean.onSlideEnd}" update="r_hidden" oncomplete="check()"/>
                                         </p:slider>
                                     </div>
@@ -76,7 +73,7 @@
                             </tr>
                         </table>
                         <div class="buttonsForm">
-                            <p:commandButton process="@form" styleClass="button" id="checkButton" type="Submit" action="#{pointsBean.addResultToDB}" value="Check" update="resultsTable" oncomplete="redrawPoints()"/><br/>
+                            <p:commandButton process="@form" styleClass="button" id="checkButton" type="Submit" action="#{pointsBean.addResultToDB}" value="Check" update="resultsTable" onclick="validateValues()" oncomplete="redrawPoints()"/><br/>
                         </div>
                     </h:form>
                     <div class="buttons">
@@ -129,6 +126,7 @@
             </tr>
         </table>
         <h:outputScript library="js" name="drawCanvas.js"/>
+        <h:outputScript library="js" name="main.js"/>
     </ui:define>
 </ui:composition>
 </html>

@@ -145,3 +145,4 @@ function check() {
     drawCanvas();
     redrawPoints();
 }
+

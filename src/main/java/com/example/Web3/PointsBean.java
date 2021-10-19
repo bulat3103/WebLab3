@@ -9,6 +9,7 @@ import org.primefaces.event.SlideEndEvent;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +18,8 @@ import java.util.List;
 @ManagedBean(name = "pointsBean", eager = true)
 @ApplicationScoped
 public class PointsBean {
+    private UIComponent errorWindow;
+
     private final PointResultController pointResultController = new PointResultController();
     private List<PointResult> pointResultList;
     private EntityDataAccessObject<Long, PointResult> dbManager = new PointResultDataAccessObject();
@@ -86,6 +89,14 @@ public class PointsBean {
             pointResultList = dbManager.getAll();
         }
         return pointResultList;
+    }
+
+    public UIComponent getErrorWindow() {
+        return errorWindow;
+    }
+
+    public void setErrorWindow(UIComponent errorWindow) {
+        this.errorWindow = errorWindow;
     }
 
     public String getX() {
