@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class PointResultDataAccessObject implements EntityDataAccessObject<Long, PointResult>{

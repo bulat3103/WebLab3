@@ -11,6 +11,7 @@ import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @ManagedBean(name = "pointsBean", eager = true)

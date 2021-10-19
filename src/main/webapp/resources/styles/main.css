@@ -47,13 +47,12 @@
     font-weight: bold;
 }
 
-.buttons {
+.buttonsForm {
     margin-top: 7%;
     text-align: center;
-    margin-bottom: 5%;
 }
 
-.buttons::before {
+.buttonsForm::before {
     content: "";
     display: block;
     height: 2px;
@@ -62,20 +61,28 @@
     background-color: rgb(49, 95, 114);
 }
 
-.button {
+.buttons {
+    text-align: center;
+}
+
+.buttonClear {
     height: 35%;
     width: 50%;
-    background-color: rgb(49, 95, 114);
+    background-color: #2196f3;
     border: none;
     margin-bottom: .5rem;
     transform: scale(0.7);
 }
 
-#checkButton, #clearButton, #exportButton, #importButton {
-    background-color: rgb(49, 95, 114);
+.button {
+    height: 35%;
+    width: 50%;
+    border: none;
+    margin-bottom: .5rem;
+    transform: scale(0.7);
 }
 
-#checkButton:hover, #clearButton:hover, #exportButton:hover, #importButton:hover {
+#checkButton:hover, #clearButton:hover{
     background-color: #76b8ff;
 }
 
@@ -124,4 +131,24 @@
 
 .input_value {
     padding-bottom: 2%;
+}
+
+.startButton {
+    text-align: center;
+    padding-top: 4em;
+}
+
+.startButtonLink {
+    display: inline-block;
+    padding: 0 1em;
+    width: auto;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: rgb(49, 95, 114);
+}
+
+.startButtonLink:hover {
+    background-color: rgb(128, 64, 155);
 }

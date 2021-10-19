@@ -1,4 +1,4 @@
-let radius = 2;
+let radius = 2.0;
 const canvasGraph = document.getElementById('canvas');
 
 function isNumeric(n) {
@@ -6,6 +6,7 @@ function isNumeric(n) {
 }
 
 canvasGraph.addEventListener('click', function (event) {
+    document.getElementById("messageArea").innerHTML = "";
     let rVal = document.querySelector("#input_form\\:r_hidden").innerHTML;
     let xFromCanvas = (event.offsetX - 200) / 165 * 5;
     if (xFromCanvas < -5) xFromCanvas = -5;
@@ -15,6 +16,10 @@ canvasGraph.addEventListener('click', function (event) {
     if (yFromCanvas <= -3) yFromCanvas = -3;
     else if (yFromCanvas >= 3) yFromCanvas = 3;
 
+    if (rVal === "") {
+        document.getElementById("messageArea").innerHTML = "Радиус не задан";
+        return;
+    }
     $(".pointX").val(Math.floor(xFromCanvas * 100) / 100);
     $(".pointY").val(Math.floor(yFromCanvas * 100) / 100);
     $(".pointR").val(rVal);
@@ -35,7 +40,7 @@ function drawPoint(xPosition, yPosition, color) {
     ctx.closePath();
 }
 
-function drawPointAfterSubmit() {
+function redrawPoints() {
     const ctx = canvasGraph.getContext('2d');
     const canvasGraphWidth = canvasGraph.clientWidth;
     const canvasGraphHeight = canvasGraph.clientHeight;
@@ -44,8 +49,10 @@ function drawPointAfterSubmit() {
     let hits = document.getElementsByClassName("hitres");
     let xs = document.getElementsByClassName("xVal");
     let ys = document.getElementsByClassName("yVal");
+    let rs = document.getElementsByClassName("rVal");
     drawCanvas();
     for (let i = 0; i < hits.length; i++) {
+        if (rs[i].innerHTML != radius * 1.0) continue;
         if (hits[i].innerHTML === "true") {
             drawPoint(xs[i].innerHTML, ys[i].innerHTML, "#22be00");
         } else {
@@ -132,6 +139,7 @@ function drawCanvas() {
 }
 
 drawCanvas();
+redrawPoints();
 
 function clickPress(event) {
     if (event.keyCode == 13) {
