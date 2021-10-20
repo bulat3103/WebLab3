@@ -40,7 +40,10 @@
                                     <h:outputLabel value="X"/>
                                 </td>
                                 <td class="input_value">
-                                    <p:inputText id="x_input" maxlength="10" a:placeholder="Number from -5 to 3..." value="#{pointsBean.x}"/>
+                                    <p:inputText id="x_input" maxlength="10" a:placeholder="Number from -5 to 3..." value="#{pointsBean.x}" required="true">
+                                        <f:validateRequired/>
+                                        <f:validateDoubleRange minimum="-5" maximum="3"/>
+                                    </p:inputText>
                                 </td>
                             </tr>
                             <tr>
@@ -64,7 +67,10 @@
                                 <td class="input_value">
                                     <div id="sliderBlock">
                                         <p:inputText id="r_hidden" value="#{pointsBean.r}" style="display: none"/>
-                                        <p:inputText id="r_input" value="#{pointsBean.r}"/>
+                                        <p:inputText id="r_input" value="#{pointsBean.r}" required="true">
+                                            <f:validateRequired/>
+                                            <f:validateDoubleRange minimum="2" maximum="5"/>
+                                        </p:inputText>
                                         <p:slider id="r_slider" styleClass="slider" for="r_input" minValue="2.0" maxValue="5.0" step="0.1">
                                             <p:ajax event="slideEnd" listener="#{pointsBean.onSlideEnd}" update="r_hidden" oncomplete="check()"/>
                                         </p:slider>
